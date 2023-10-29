@@ -7,10 +7,27 @@ using namespace std;
 void solve(){
     int n, m;
     cin >> n >> m;
-    vector<bool> a(33, false), b(33, false);
+    int a, b=0, x;
+    cin >> a;
+    for(int i=1; i<n; i++){
+        cin >> x;
+        a ^= x;
+    }
+    for(int i=0; i<m; i++){
+        cin >> x;
+        b |= x;
+    }
+    if(n%2 == 0){
+        cout << (a & (~b)) << " " << a;
+    }
+    else{
+        cout << a << " " << (a | b);
+    }
+    cout << "\n";
 }
 
 signed main(){
+    Anemoi
     int n;
     cin >> n;
     for(int i=0; i<n; i++){
