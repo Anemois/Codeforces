@@ -1,4 +1,4 @@
-//11/3/2023
+//11/4/2023
 #include <bits/stdc++.h>
 #define Anemoi ios_base::sync_with_stdio(false);cin.tie(0);
 #define int long long
@@ -45,10 +45,10 @@ int solve(){
                 sum4 += str[i]-'0';
             for(int i=min(n/2+2, n); i<n; i++)
                 sum4 -= str[i]-'0';
-            sum1 = abs(sum1);
-            sum2 = abs(sum2);
-            sum3 = abs(sum3);
-            sum4 = abs(sum4);
+            sum1 = max(sum1, 0LL);
+            sum2 = max(sum2, 0LL);
+            sum3 = max(sum3, 0LL);
+            sum4 = max(sum4, 0LL);
             //cout << sum1 << " " << sum2 << " " << sum3 << " " << sum4 << "\n";      
             ans += has[2][sum1] + has[2][sum2] + has[4][sum3] + has[4][sum4];
         }
@@ -84,12 +84,13 @@ int solve(){
             for(int i=min(n/2+3, n); i<n; i++)
                 sum6 -= str[i]-'0';
             
-            sum1 = abs(sum1);
-            sum2 = abs(sum2);
-            sum3 = abs(sum3);
-            sum4 = abs(sum4);
-            sum5 = abs(sum5);
-            sum6 = abs(sum6);
+            sum1 = max(sum1, 0LL);
+            sum2 = max(sum2, 0LL);
+            sum3 = max(sum3, 0LL);
+            sum4 = max(sum4, 0LL);
+            sum5 = max(sum5, 0LL);
+            sum6 = max(sum6, 0LL);
+
             //cout << sum1 << " " << sum2 << " " << sum3 << " " << sum4 << " " << sum5 << " " << sum6 << "\n";
             ans += has[1][sum1] + has[1][sum2] + has[3][sum3] + has[3][sum4] + has[5][sum5] + has[5][sum6];
         }

@@ -4,30 +4,25 @@
 #define int long long
 using namespace std;
 
-bool check(int& n, int& m, int& a, int& k){
-    int t = n/k;
-    if(abs(t*k - n) > abs((t+1)*k - n))
-        t++;
-    int diff = abs(n - t*k);
-    return max(diff-a, 0LL) + t <= m;
+int Over(int targ, int val, int cnt_a, int cnt_b){
+    targ -= cnt_a; if(targ <= 0) return 0;
+    int n = targ/val + 1;
+    int over = n*val;
+    if(over - targ > cnt_a) return INT_MAX;
+    return max(0LL, n-cnt_b);
+}
+
+int Before(int targ, int val, int cnt_a, int cnt_b){
+    targ -= cnt_a; if(targ <= 0) return 0;
+    int n = targ/val;
+    int before = n*val;
+    return max(0LL, n-cnt_b) + targ - before;
 }
 
 int solve(){
-    int n, k, a, b;
-    cin >> n >> k >> a >> b;
-    int t = min(n/k, b);
-    if(t < b && abs(t*k - n) > abs((t+1)*k - n))
-        t++;
-    int diff = abs(n - t*k);
-    int l = 0, r = 100000000;
-    while(l < r){
-        int m = (l+r)/2;
-        if(check(diff, m, a, k))
-            r = m;
-        else
-            l = m+1;
-    }
-    return l;
+    int targ, val, cnt_a, cnt_b;
+    cin >> targ >> val >> cnt_a >> cnt_b;
+    return min(Over(targ, val, cnt_a, cnt_b), Before(targ, val, cnt_a, cnt_b));
 }
 
 signed main(){
@@ -37,3 +32,8 @@ signed main(){
     for(int i=0; i<n; i++)
         cout << solve() << "\n";
 }
+/*
+thought:
+    why do i feel like im getting worse and worse at coding...
+    i went on the complete wrong direction at first
+*/
