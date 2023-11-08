@@ -1,24 +1,41 @@
-//2023/10/28
+//2023/11/7 difficulty:1300
 #include <bits/stdc++.h>
 #define Anemoi ios_base::sync_with_stdio(false);cin.tie(0);
 #define int long long
 using namespace std;
+const int MOD = 998244353;
 
-int solve(){
-	int n;
-	cin >> n;
-	int Asum=0, Bsum=0, Amn=INT_MAX, Bmn=INT_MAX, x;
-	for(int i=0; i<n; i++){
-		cin >> x;
-		Asum += x;
-		Amn = min(Amn, x);
+int C(int x){
+	int ret=1;
+	for(int i=x; i>=2; i--){
+		ret = (ret * i)%MOD;
 	}
-	for(int i=0; i<n; i++){
-		cin >> x;
-		Bsum += x;
-		Bmn = min(Bmn, x);
+	return ret%MOD;
+}
+
+void solve(){
+	int cnt=1;
+	vector<int> vect;
+	string str;
+	cin >> str;
+	int n = str.length();
+
+	for(int i=1; i<n; i++){
+		if(str[i] != str[i-1]){
+			vect.push_back(cnt);
+			cnt = 1;
+		}
+		else
+			cnt++;
 	}
-	return min(Asum+(Bmn*n), Bsum + (Amn*n));
+	vect.push_back(cnt);
+	int ans=1, anscnt=0;
+	
+	for(auto& i : vect){
+		ans = (ans * (i))%MOD;
+		anscnt += i-1; 
+	}	
+	cout << anscnt << " " << (ans*C(anscnt))%MOD << "\n";
 }
 
 signed main()
@@ -27,6 +44,6 @@ signed main()
 	int n;
 	cin >> n;
 	for(int i=0; i<n; i++)
-		cout << solve() << "\n";
+		solve();
 	return 0;
 }
