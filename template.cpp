@@ -9,8 +9,8 @@ void solve(){
 
 signed main(){
     Anemoi
-    int n = 1;
-    cin >> n;
-    for(int i=0; i<n; i++)
+    int t = 1;
+    cin >> t;
+    for(int i=0; i<t; i++)
         solve();
 }
