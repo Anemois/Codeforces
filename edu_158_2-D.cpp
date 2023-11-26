@@ -10,26 +10,26 @@ int solve(){
     vector<int> vect(n);
     for(int i=0; i<n; i++)
         cin >> vect[i];
-    if(n == 1)
-        return vect[0];
-
-    vector<int> ltr(n), rtl(n);
-    int x = vect[0];
+    vector<int> l(n), r(n);
     for(int i=0; i<n; i++){
-        x = max(x, vect[i]);
-        rtl[i] = x;
-        x++;
+        l[i] = vect[i] + (n-i-1);
+        r[i] = vect[i] + i;
     }
-    x = vect[n-1];
-    for(int i=n-1; i>=0; i--){
-        x = max(x, vect[i]);
-        ltr[i] = x;
-        x++;
-    }
-    int ans=min(max(vect[0], ltr[1]+1), max(vect[n-1], rtl[n-2]+1));
-    for(int i=1; i<n-1; i++){
-        ans = min(ans, max(vect[i], rtl[i-1] + ltr[i+1] + 1));
-    }
+    for(int i=1; i<n; i++)
+        l[i] = max(l[i], l[i-1]);
+    for(int i=n-2; i>=0; i--)
+        r[i] = max(r[i], r[i+1]);
+    if(n==1)
+        return vect[0];
+    // for(auto& i : l)
+    //     cout << i << " ";
+    // cout << "\n";
+    // for(auto& i : r)
+    //     cout << i << " ";
+    // cout << "\n";
+    int ans = min(max(vect[0], r[1]), max(vect[n-1], l[n-2]));
+    for(int i=1; i<n-1; i++)
+        ans = min(ans, max({vect[i], l[i-1], r[i+1]}));
     return ans;
 }
 
