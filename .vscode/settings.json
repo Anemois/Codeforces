@@ -12,6 +12,8 @@
         "complex": "cpp",
         "sstream": "cpp",
         "regex": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "random": "cpp",
+        "new": "cpp"
     }
 }
