@@ -1,32 +1,78 @@
-//2023/12/25 difficulty:1600
+//2023/12/26 difficulty:1600
 #include <bits/stdc++.h>
 
 #define HAS_T true
-#define MAIN void
+#define INT
 
 #define Anemoi ios_base::sync_with_stdio(false);cin.tie(0);
 #define int long long
 using namespace std;
 
-#if MAIN == INT
+int n, m;
+vector<int> vect(1e5+10);
+
+struct P{
+	int l, r;
+};
+
+bool check(vector<P>& segs, vector<int>& query, int x){
+	fill(vect.begin()+1, vect.begin()+m+1, 0);
+	for(int i=1; i<=x; i++)
+		vect[query[i]]++;
+	for(int i=1; i<=n; i++)
+		vect[i] += vect[i-1];
+	for(auto& i : segs){
+		if(vect[i.r] - vect[i.l-1] >= (i.r+i.l)/2+1)
+			return true;
+	}
+	return false;
+}
+#if defined(VOID)
+void
+#elif defined(INT)
 int
-#else
-MAIN
+#elif defined(BOOL)
+bool
+#elif defined(STRING)
+string
 #endif
 solve(){
-	
+	cin >> n >> m;
+	vector<P> segs(m);
+	for(int i=0; i<m; i++){
+		cin >> segs[i].l >> segs[i].r;
+	}
+	int q;
+	cin >> q;
+	vector<int> query(q+1);
+	for(int i=1; i<=q; i++)
+		cin >> query[i];
+	int l=0, r=q;
+	while(l < r){
+		int m = (l+r)/2;
+		if(m == 0){
+			l = -1;
+			break;
+		}
+		if(check(segs, query, m))
+			r = m;
+		else
+			l = m+1;
+	}
+	return l;
 }
 
 signed main(){
 	Anemoi
+	vect[0] = 0;
 	int t;
 	#if HAS_T == true
 	cin >> t;
 	#endif
 	while(t--){
-		#if MAIN == void
+		#if defined(VOID)
 		solve();
-		#elif MAIN == bool
+		#elif defined(BOOL)
 		if(solve())
 			cout << "YES\n";
 		else
