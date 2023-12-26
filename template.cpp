@@ -22,7 +22,6 @@ solve(){
 
 signed main(){
 	Anemoi
-	vect[0] = 0;
 	int t;
 	#if HAS_T == true
 	cin >> t;
