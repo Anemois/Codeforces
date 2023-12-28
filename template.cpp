@@ -22,7 +22,7 @@ solve(){
 
 signed main(){
 	Anemoi
-	int t;
+	int t=1;
 	#if HAS_T == true
 	cin >> t;
 	#endif
