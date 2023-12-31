@@ -1,3 +1,4 @@
+//2023/12/30 https://codeforces.com/contest/1916/problem/B
 #include <bits/stdc++.h>
 
 #define HAS_T true
@@ -17,7 +18,18 @@ bool
 string
 #endif
 solve(){
-	
+	int a, b;
+	cin >> a >> b;
+	if(a == 1)
+		return b*b;
+	else if(a == 2)
+		return b*2;
+	int lcm = (a*b)/(__gcd(a, b));
+	if(lcm != b){
+		return lcm;
+	}
+	else
+		return b*(b/a);
 }
 
 signed main(){
@@ -41,10 +53,3 @@ signed main(){
 		
 	return 0;
 }
-/*
-int overflow
-array bounds special cases (n=1?) 
-do smth instead of nothing and stay organized
-WRITE STUFF DOWN DON'T GET STUCK ON ONE APPROACH
-you should actually read the stuff at the bottom
-*/
